@@ -74,7 +74,7 @@
 
 ## **December**
 
-### **Dec 1 – Dec 6**
+### **Dec 01 – Dec 06**
 | Date | Activities |
 |------|-----------|
 | **Mon Dec 1** | • Office Hour: Wale (19:00) |
