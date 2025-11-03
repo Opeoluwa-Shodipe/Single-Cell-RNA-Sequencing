@@ -1,4 +1,4 @@
-**SINGLE CELLS, BIG DATA: HOW ONE CELL CAN TELL A THOUSAND STORIES**
+#SINGLE CELLS, BIG DATA: HOW ONE CELL CAN TELL A THOUSAND STORIES#
 
 Osatoyinbo Opemidimeji<sup>1\*</sup>, Vishnushiri Shyamsaisundar<sup>1</sup>, Awosise Oluwaseun<sup>1</sup>, Qonita Fillah<sup>1</sup>, Abiodun Joy<sup>1</sup>, Aakash Deva Thirukonda<sup>1</sup>, Amin Abdurrahman<sup>1</sup>, Alo Yetunde Mary<sup>1</sup>, Brenda Namugamba<sup>1</sup>, Opeoluwa Shodipe<sup>1</sup>, Onah Victor<sup>1</sup>, Ishita Chopra<sup>1</sup>, Olorunfemi Popoola<sup>1</sup>
 
