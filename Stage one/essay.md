@@ -210,7 +210,7 @@ Moreover, as AI models evolve, they will enable cross-platform learning, where i
 While single-cell sequencing captures molecular information from isolated cells, the next generation of research aims to preserve spatial and temporal context. The integration of spatial transcriptomics and spatiotemporal modeling allows scientists to visualize how gene expression varies within intact tissues. Mapping the spatial gene landscape of the developing human kidney, reveals dynamic cell-cell interactions that underlie organ formation (Wu _et al._, 2024).
 
 
-Figure 6: Spatial transcriptomic map of human kidney development (Cell & Bioscience, 12:80).
+Figure 6: Spatial transcriptomic map of human kidney development (Cell & Bioscience, 12:80)
 
 Future innovations will likely combine spatial omics with live-cell imaging and temporal sampling, allowing real-time tracking of cellular differentiation and response to stimuli. This convergence will transform our understanding of organ development, disease progression, and therapeutic response.
 
