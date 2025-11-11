@@ -1,0 +1,13 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+bc_url = 'https://raw.githubusercontent.com/HackBio-Internship/2025_project_collection/refs/heads/main/Python/Dataset/data-3.csv'
+
+bc = pd.read_csv(bc_url)
+sns.scatterplot(data=bc, x='smoothness_mean', y='compactness_mean', hue='diagnosis', palette={'M': 'orange', 'B': 'blue'}, alpha=0.7)
+plt.title('e. Compactness vs Smoothness')
+plt.xlabel('Smoothness Mean')
+plt.ylabel('Compactness Mean')
+plt.grid(True)
+plt.show()
