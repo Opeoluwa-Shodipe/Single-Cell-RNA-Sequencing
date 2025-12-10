@@ -1,168 +1,114 @@
-# SARS-CoV-2 Infection Dynamics - Single-Cell RNA-seq Analysis
+# SARS-CoV-2 Infection Dynamics - scRNA-seq Analysis
 
 
-**Single-cell RNA sequencing analysis of SARS-CoV-2 infection dynamics across mock, 1dpi, 2dpi, and 3dpi conditions using 10x Genomics datasets (~100k cells × 33k genes).**
+**Reproduction of neighborhood clustering, cell type identification, and pseudotime analysis from [PLoS Biology 2021](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3001143) using GSE166766 data.**
 
-## 🎯 Project Summary
+## 🎯 Project Overview
 
-Comprehensive scRNA-seq pipeline analyzing SARS-CoV-2 infection progression in respiratory epithelial cells. Identifies temporal cell type dynamics, ACE2 expression patterns, and infection-responsive pathways.
+Single-cell RNA-seq analysis of SARS-CoV-2 infected human bronchial epithelial cells across mock, 1dpi, 2dpi, and 3dpi conditions. Reproduces Figures 1G(i-iii), 3A, 3B, 4A, 4B from the reference paper.
 
-### 🧬 Key Biological Insights
+**Data**: [GSE166766](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE166766) (~100k cells × 33k genes)
 
-- **Primary targets**: Ciliated/olfactory epithelial cells (peak ACE2 at 3dpi)
+## 🧬 Key Findings
 
-- **Immune dynamics**: Mast cell activation correlates with cytokine signaling
+| Timepoint | Cells | Dominant Cell Types | ACE2 Status |
 
-- **Neuroinvasion**: ENO2 upregulation in glia populations
+|-----------|-------|-------------------|-------------|
 
-- **Pathway enrichment**: Interferon response peaks at 2-3dpi
+| Mock | 22,609| Mixed epithelial | Baseline |
 
-## 📁 Repository Contents
+| 1dpi | 11,834| Ciliated ↑ | Constitutive|
 
-SARS-CoV-2-Infection-Dynamics/
-├── SARS-Cov-2-Infection-Dynamics.ipynb # Main analysis (scanpy + CellTypist)
-├── SARS-Cov-2-Infection-Dynamics-1.ipynb # Decoupler pathway analysis
-├── README.md # 📄 This file
-├── data/ # 10x Genomics (GSM5082289-92)
-│ ├── Mock/
-│ ├── 1dpi/
-│ ├── 2dpi/
-│ └── 3dpi/
-└── outputs/ # UMAPs, annotations, scores
+| 2dpi | 14,695| Olfactory ↑ | Stable |
 
-text
+| 3dpi | 28,530| **Ciliated peak** | **Highest** |
+
+**Primary targets**: Ciliated/olfactory epithelial cells with peak ACE2 expression at 3dpi
 
 ## 🚀 Quick Start (Google Colab)
 
-### 1. Clone Repository
-
+1. Clone repo
 git clone
 
 https://github.com/YOUR_USERNAME/SARS-CoV-2-Infection-Dynamics.git
 
 cd SARS-CoV-2-Infection-Dynamics
 
-text
-
-### 2. Open in Colab
-
-Runtime → Change runtime type → GPU (recommended)
-!pip install scanpy==1.11.5 celltypist decoupler leidenalg igraph fa2-modified
+2. Install dependencies
+pip install scanpy==1.11.5 celltypist decoupler leidenalg
 
 text
 
-### 3. Mount Data & Run
+undefined
 
-from google.colab import drive
-drive.mount('/content/drive')
+3. Load 10x data (update paths)
+import scanpy as sc
+mock_adata = sc.read_10x_mtx('data/Mock', prefix='GSM5082289_mock_')
 
-Load datasets (update paths to your 10x folders)
-mock_adata = sc.read_10x_mtx('/content/drive/MyDrive/HackBio/Mock',
-prefix='GSM5082289_mock_')
-
-Run notebook cells sequentially
+Run notebook sequentially
 text
 
-## 🔬 Complete Analysis Pipeline
+## 🔬 Analysis Pipeline
 
-🔄 Data Loading (4 conditions: mock/1/2/3 dpi)
-→ 22k-28k cells × 33k genes each
-🧹 Preprocessing
-→ QC → Normalize → Log1p → HVGs (top 1000-2000)
-📍 Dimensionality Reduction
-→ PCA → Neighbors → UMAP → Leiden clustering
-🏷️ Annotation
-→ CellTypist (automated cell type classification)
-🎯 Pathway Analysis
-→ decoupler ULM (markers network, bsize=10000)
-📊 Visualization
-→ Condition-colored UMAPs + feature plots (ACE2, ENO2)
-text
+1. **Data Loading** → 4 conditions (mock/1/2/3 dpi)
 
-## 📊 Results Dashboard
+2. **Preprocessing** → QC → Normalize → HVGs (top 1000)
 
-| Timepoint | Cells (n) | Dominant Types | ACE2 Status | Key Pathways |
+3. **Clustering** → PCA → UMAP → Leiden
 
-|-----------|-----------|----------------|-------------|--------------|
+4. **Annotation** → CellTypist
 
-| **Mock** | 22,609 | Mixed epithelial | Baseline | Housekeeping |
+5. **Trajectory** → Pseudotime analysis
 
-| **1dpi** | 11,834 | Ciliated ↑ | Constitutive | Early ISG |
+6. **Pathways** → decoupler ULM
 
-| **2dpi** | 14,695 | Olfactory ↑ | Stable | Interferon |
+**Memory fix for Colab**:
 
-| **3dpi** | 28,530 | Mast ↑, Ciliated peak | **Highest** | Cytokine storm |
-
-## ⚙️ Technical Specifications
-
-### Dependencies
-
-scanpy==1.11.5 # scRNA-seq core
-celltypist==1.7.1 # Cell type annotation
-decoupler==2.1.2 # Pathway enrichment
-leidenalg==0.11.0 # Clustering
-anndata==0.12.6 # Data format
-
-text
-
-### Memory Optimization
-
-For free Colab (12GB RAM):
 sc.pp.highly_variable_genes(adata, n_top_genes=1000)
-dc.mt.ulm(..., bsize=10000) # Critical for ULM
-
-Colab Pro (52GB): Full 33k genes possible
-text
-
-## 🔍 Key Outputs Generated
-
-1. **UMAP plots**: Condition + cell type colored
-
-2. **Cell annotations**: Hepatocytes, ciliated, olfactory, mast cells
-
-3. **ACE2 violin plots**: Temporal expression dynamics
-
-4. **Pathway scores**: ULM z-scores (interferon, cytokine)
-
-5. **Marker networks**: decoupler results
-
-
-## 🛠️ Troubleshooting
-
-| Issue | Solution |
-
-|-------|----------|
-
-| **RAM Crash** | `n_top_genes=1000`, `bsize=5000` |
-
-| **CellTypist slow** | First run downloads model (~500MB) |
-
-| **UMAP poor** | `n_neighbors=30`, restart PCA |
-
-| **decoupler fails** | Try `dc.mt.vision()` alternative |
-
-## 📄 License
-
-**MIT License** - Free for research/education/commercial use.
-
-Copyright (c) 2025 Opeoluwa Shodipe
-
-Permission is hereby granted, free of charge, to any person obtaining a copy...
+dc.mt.ulm(..., bsize=10000)
 
 text
 
-## 🙌 Acknowledgments
+## 📁 Repository Structure
 
-- **Scanpy developers** - scRNA-seq gold standard
+├── SARS-Cov-2-Infection-Dynamics.ipynb # Main analysis
+├── SARS-Cov-2-Infection-Dynamics-1.ipynb # Pathway analysis
+├── data/ # GSE166766 MTX/TSV files
+│ ├── Mock/, 1dpi/, 2dpi/, 3dpi/
+└── README.md
 
-- **CellTypist team** - Automated annotation
+text
 
-- **Decoupler/SaezLab** - Pathway inference
+## 📊 Outputs
 
-- **10x Genomics** - Public SARS-CoV-2 datasets
+- UMAPs (condition/cell type colored)
 
----
+- Cell annotations (ciliated, olfactory, mast cells)
 
-**🔬 Reproducible bioinformatics research made easy**
+- ACE2 expression dynamics
 
-*Last updated: December 10, 2025*
+- Pseudotime trajectories
+
+- Pathway enrichment scores
+
+## 🛠️ Dependencies
+
+scanpy==1.11.5 # Core analysis
+celltypist==1.7.1 # Annotation
+decoupler==2.1.2 # Pathways
+leidenalg==0.11.0 # Clustering
+
+text
+
+## 🆘 Troubleshooting
+
+| Issue | Fix |
+
+|-------|-----|
+
+| RAM crash | `n_top_genes=1000`, `bsize=5000` |
+
+| Slow CellTypist | First run downloads model |
+
+| decoupler fails | Use `dc.mt.vision()` |
+
