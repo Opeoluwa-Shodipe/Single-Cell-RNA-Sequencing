@@ -1,12 +1,5 @@
 # SARS-CoV-2 Infection Dynamics - Single-Cell RNA-seq Analysis
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)\](https://opensource.org/licenses/MIT)
-
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)\](https://www.python.org/downloads/)
-
-[![Scanpy](https://img.shields.io/badge/scanpy-1.11.5-orange.svg)\](https://scanpy.readthedocs.io/)
-
-[![Colab](https://img.shields.io/badge/Google%20Colab-Ready-green.svg)\](https://colab.research.google.com/)
 
 **Single-cell RNA sequencing analysis of SARS-CoV-2 infection dynamics across mock, 1dpi, 2dpi, and 3dpi conditions using 10x Genomics datasets (~100k cells × 33k genes).**
 
@@ -133,17 +126,6 @@ text
 
 5. **Marker networks**: decoupler results
 
-## 📝 Citation
-
-Shodipe, O. (2025). SARS-CoV-2 Infection Dynamics:
-Single-Cell RNA-seq Analysis of Temporal Cell Type Changes.
-GitHub:
-
-https://github.com/YOUR_USERNAME/SARS-CoV-2-Infection-Dynamics
-
-Data: GEO GSE165063 (10x Genomics)
-
-text
 
 ## 🛠️ Troubleshooting
 
